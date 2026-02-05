@@ -123,22 +123,26 @@
             border-color: var(--accent); background: rgba(59, 130, 246, 0.05); 
         }
 
-        #linkedin.project-exec:hover { 
+        #accent.project-exec:hover { 
             color: var(--accent);
             border-color: var(--accent); background: rgba(59, 130, 246, 0.05); 
         }
 
-        #github.project-exec:hover { 
+        #dim.project-exec:hover { 
             color: var(--text-dim);
             border-color: var(--text-dim); background: rgba(59, 130, 246, 0.05); 
         }
 
-        #instagram.project-exec:hover { 
+        #rosa.project-exec:hover { 
             color: var(--rosa);
             border-color: var(--rosa); background: rgba(59, 130, 246, 0.05); 
         }
+        #project.project-exec:hover { 
+            color: var(--text-dim);
+            border-color: var(--rosa); background: rgba(59, 130, 246, 0.05); 
+        }
 
-        #whatsapp.project-exec:hover { 
+        #verde.project-exec:hover { 
             color: var(--verde);
             border-color: var(--verde); background: rgba(59, 130, 246, 0.05); 
         }
@@ -213,7 +217,7 @@
             </div>
         </div>
         <div class="win-body">
-            <h2>Gabriel Tertuliano</h2></p>
+            <h2>Gabriel Tertuliano</h2>
             <p>
                 Tenho 20 anos, sou apaixonado por música, tecnologia e viagens. Meu principal foco é o desenvolvimento back-end e, nos últimos tempos, também tenho me dedicado bastante à leitura.
             </p>
@@ -240,7 +244,7 @@
             </div>
         </div>
         <div class="win-body">
-            <div class="project-exec">
+            <div class="project-exec" id="project">
                 <i data-lucide="square-mouse-pointer" size="28"></i>
                 <div>
                     <strong>IFit</strong>
@@ -250,7 +254,7 @@
                 </div>
             </div>
 
-            <div class="project-exec">
+            <div class="project-exec" id="project">
                 <i data-lucide="square-mouse-pointer" size="28"></i>
                 <div>
                     <strong>Gerenciador de tarefas com árvore Heap</strong>
@@ -300,28 +304,28 @@
         </div>
         <div class="win-body" style="text-align: center;">
 
-            <div id="linkedin" class="project-exec">
+            <div id="accent" class="project-exec">
                 <i data-lucide="linkedin" size="28"></i>
                 <div>
                     <a href="https://linkedin.com/in/gabriel-tertuliano-" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">LinkedIn</a>
                 </div>
             </div>
 
-            <div id="github" class="project-exec">
+            <div id="dim" class="project-exec">
                 <i data-lucide="github" size="28"></i>
                 <div>
                      <a href="https://github.com/CCodeKey" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">GitHub</a>
                 </div>
             </div>
 
-            <div id="whatsapp" class="project-exec">
+            <div id="verde" class="project-exec">
                 <i data-lucide="message-circle-more" size="28"></i>
                 <div>
                      <a href="https://wa.me/83996228117" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">WhatsApp</a>
                 </div>
             </div>
 
-            <div id="instagram" class="project-exec">
+            <div id="rosa" class="project-exec">
                 <i data-lucide="instagram" size="28"></i>
                 <div>
                      <a href="https://www.instagram.com/codekey.py/" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">Instagram</a>
@@ -332,7 +336,7 @@
 
     <footer id="taskbar">
         <div class="start-btn">
-            <i data-lucide="command" size="20"></i>
+            <i data-lucide="code-xml" size="20"></i>
             <span>Gabriel Tertuliano</span>
         </div>
         <div id="clock" class="time">00:00:00</div>

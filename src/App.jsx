@@ -1,11 +1,3 @@
-import MyPage from "./MyPage";
-
-function App() {
-  return (
-    <>
-      <MyPage/>
-    </>
-  );
-}
+function App() {}
 
 export default App;

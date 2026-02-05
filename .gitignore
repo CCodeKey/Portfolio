@@ -14,6 +14,7 @@ dist-ssr
 package-lock.json
 
 # Editor directories and files
+package-lock.json
 .vscode/*
 !.vscode/extensions.json
 .idea

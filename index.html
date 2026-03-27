@@ -10,13 +10,12 @@
         sizes="16x16"
         href="/public/favicon-16x16.png"
         />
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="src/styles/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v10/font/simple-icons.min.css">
         <script src="https://unpkg.com/lucide@latest"></script>
     </head>
     <body>
-
         <div id="desktop">
             <div class="desktop-icon" onclick="openWindow('win-about')">
                 <i data-lucide="user" size="42"></i>
@@ -43,7 +42,6 @@
                 <span data-i18n="icon-resume">/currículo</span>
             </div>
         </div> 
-
         <div id="win-about" class="window" style="top: 10%; left: 20%; width: 500px;">
             <div class="win-header">
                 <div class="win-title" data-i18n="win-title-about">System Information: /sobre mim</div>
@@ -72,7 +70,6 @@
                 
             </div>
         </div>
-
         <div id="win-projects" class="window" style="top: 15%; left: 25%; width: 600px;">
             <div class="win-header">
                 <div class="win-title" data-i18n="win-title-projects">Executable Files: /projetos</div>
@@ -105,7 +102,6 @@
             </div>
 
         </div>
-
         <div id="win-skills" class="window" style="top: 20%; left: 30%; width: 450px;">
             <div class="win-header">
                 <div class="win-title" data-i18n="win-title-skills">Core Modules: /Habilidades</div>
@@ -131,7 +127,6 @@
                 </div>
             </div>
         </div>
-
         <div id="win-contact" class="window" style="top: 30%; left: 40%; width: 400px;">
             <div class="win-header">
                 <div class="win-title" data-i18n="win-title-contact">Network Interface: /contato</div>
@@ -171,7 +166,6 @@
                 </div>
             </div>
         </div>
-
         <div id="win-resume" class="window" style="top: 25%; left: 35%; width: 400px;">
             <div class="win-header">
                 <div class="win-title" data-i18n="win-title-resume">Document Viewer: /curriculo.pdf</div>
@@ -192,7 +186,6 @@
                 </a>
             </div>
         </div>
-
         <footer id="taskbar">
             <div class="start-btn">
                 <i data-lucide="code-xml" size="20"></i>
@@ -213,6 +206,6 @@
                 <div id="clock" class="time">00:00:00</div>
             </div>
         </footer>
-        <script src="script.js"></script>
+        <script src="src/js/script.js"></script>
     </body>
 </html>

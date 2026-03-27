@@ -1,0 +1,275 @@
+:root {
+    --bg-os: #08080a;
+    --win-bg: rgba(20, 20, 22, 0.85);
+    --accent: #3b82f6;
+    --verde: #11b925;
+    --rosa: #bc1777;
+    --border: rgba(255, 255, 255, 0.1);
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --taskbar: rgba(10, 10, 12, 0.8);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text);
+}
+
+/* Desktop Area */
+#desktop {
+    height: calc(100vh - 60px);
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-rows: repeat(auto-fill, 110px);
+    gap: 20px;
+    align-content: flex-start;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.2s;
+    padding: 10px;
+    border: 1px solid transparent;
+}
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border);
+}
+.desktop-icon i { color: var(--accent); margin-bottom: 8px; filter: drop-shadow(0 0 10px var(--accent)); }
+.desktop-icon span { font-size: 0.75rem; font-weight: 500; text-align: center; }
+
+/* Window System */
+.window {
+    position: absolute;
+    background: var(--win-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    display: none; /* Inicia oculto */
+    flex-direction: column;
+    min-width: 400px;
+    overflow: hidden;
+    z-index: 10;
+    animation: win-open 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes win-open {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+        /* Estilização do Toggle de Idioma */
+.lang-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    width: 80px;
+    height: 30px;
+}
+
+.lang-wrapper:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.lang-slider {
+    position: absolute;
+    width: 36px;
+    height: 24px;
+    background: var(--accent);
+    border-radius: 15px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.lang-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 2;
+    padding: 0 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: bold;
+    pointer-events: none;
+    line-height: 24px;
+}
+
+        /* Container do Switch */
+.lang-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    width: 75px;
+    height: 28px;
+    user-select: none;
+}
+
+.lang-wrapper:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+/* A "Pílula" que desliza */
+.lang-slider {
+    position: absolute;
+    left: 2px; /* Posição inicial */
+    width: 34px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 15px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 10px var(--accent);
+    z-index: 1;
+}
+
+/* As Labels PT e EN */
+.lang-labels {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    z-index: 2; /* Fica acima do slider */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.lang-labels span {
+    color: var(--text-dim);
+    transition: color 0.3s;
+    width: 30px;
+    text-align: center;
+}
+
+.active-lang {
+    color: #ffffff !important;
+}
+
+.lang-labels span {
+    color: var(--text-dim);
+    transition: color 0.3s;
+}
+
+.active-lang {
+    color: #fff !important;
+}
+
+.win-header {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    border-bottom: 1px solid var(--border);
+}
+
+.win-controls { display: flex; gap: 8px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; }
+.dot-close { background: #ff5f56; }
+.dot-min { background: #ffbd2e; }
+.dot-max { background: #27c93f; }
+
+.win-title { font-size: 0.75rem; font-family: 'JetBrains Mono'; color: var(--text-dim); text-transform: uppercase; }
+
+.win-body { padding: 25px; overflow-y: auto; max-height: 70vh; }
+
+/* Content Styles */
+.project-exec {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.project-exec:hover { 
+    color: var(--text-dim);
+    border-color: var(--accent); background: rgba(59, 130, 246, 0.05); 
+}
+
+#accent.project-exec:hover { 
+    color: var(--accent);
+    border-color: var(--accent); background: rgba(59, 130, 246, 0.05); 
+}
+
+#dim.project-exec:hover { 
+    color: var(--text-dim);
+    border-color: var(--text-dim); background: rgba(59, 130, 246, 0.05); 
+}
+
+#rosa.project-exec:hover { 
+    color: var(--rosa);
+    border-color: var(--rosa); background: rgba(59, 130, 246, 0.05); 
+}
+#project.project-exec:hover { 
+    color: var(--text-dim);
+    border-color: var(--rosa); background: rgba(59, 130, 246, 0.05); 
+}
+
+#verde.project-exec:hover { 
+    color: var(--verde);
+    border-color: var(--verde); background: rgba(59, 130, 246, 0.05); 
+}
+.project-exec i { color: #10b981; }
+
+.tech-tag {
+    font-family: 'JetBrains Mono';
+    font-size: 0.65rem;
+    background: var(--accent-soft);
+    color: var(--rosa);
+    padding: 2px 8px;
+    border: 1px solid var(--rosa);
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+/* Taskbar */
+#taskbar {
+    height: 60px;
+    background: var(--taskbar);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    display: grid; /* Mudamos de flex para grid para controle total */
+    grid-template-columns: 1fr auto 1fr; /* Esquerda, Centro (auto), Direita */
+    align-items: center;
+    padding: 0 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.start-btn { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--accent); }
+.time { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--text-dim); }
+
+/* Typography */
+h2 { font-size: 1.5rem; margin-bottom: 15px; color: var(--accent); }
+p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }

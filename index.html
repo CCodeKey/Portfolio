@@ -1,333 +1,182 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portifólio</title>
-        <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/public/favicon-16x16.png"
-    />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        :root {
-            --bg-os: #08080a;
-            --win-bg: rgba(20, 20, 22, 0.85);
-            --accent: #3b82f6;
-            --verde: #11b925;
-            --rosa: #bc1777;
-            --border: rgba(255, 255, 255, 0.1);
-            --text: #e2e8f0;
-            --text-dim: #94a3b8;
-            --taskbar: rgba(10, 10, 12, 0.8);
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portifólio</title>
+            <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/public/favicon-16x16.png"
+        />
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
-            font-family: 'Inter', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            color: var(--text);
-        }
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v10/font/simple-icons.min.css">
+        <script src="https://unpkg.com/lucide@latest"></script>
+    </head>
+    <body>
 
-        /* Desktop Area */
-        #desktop {
-            height: calc(100vh - 60px);
-            padding: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 100px);
-            grid-template-rows: repeat(auto-fill, 110px);
-            gap: 20px;
-            align-content: flex-start;
-        }
+        <div id="desktop">
+            <div class="desktop-icon" onclick="openWindow('win-about')">
+                <i data-lucide="user" size="42"></i>
+                <span data-i18n="icon-about">/sobre</span>
+            </div>
+            
+            <div class="desktop-icon" onclick="openWindow('win-projects')">
+                <i data-lucide="folder-code" size="42"></i>
+                <span data-i18n="icon-projects">/projetos</span>
+            </div>
 
-        .desktop-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.2s;
-            padding: 10px;
-            border: 1px solid transparent;
-        }
-        .desktop-icon:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--border);
-        }
-        .desktop-icon i { color: var(--accent); margin-bottom: 8px; filter: drop-shadow(0 0 10px var(--accent)); }
-        .desktop-icon span { font-size: 0.75rem; font-weight: 500; text-align: center; }
+            <div class="desktop-icon" onclick="openWindow('win-skills')">
+                <i data-lucide="cpu" size="42"></i>
+                <span data-i18n="icon-skills">/stack</span>
+            </div>
 
-        /* Window System */
-        .window {
-            position: absolute;
-            background: var(--win-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
-            display: none; /* Inicia oculto */
-            flex-direction: column;
-            min-width: 400px;
-            overflow: hidden;
-            z-index: 10;
-            animation: win-open 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
+            <div class="desktop-icon" onclick="openWindow('win-contact')">
+                <i data-lucide="terminal" size="42"></i>
+                <span data-i18n="icon-contact">/contato</span>
+            </div>
 
-        @keyframes win-open {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-                /* Estilização do Toggle de Idioma */
-        .lang-wrapper {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            width: 80px;
-            height: 30px;
-        }
+            <div class="desktop-icon" onclick="openWindow('win-resume')">
+                <i data-lucide="file-text" size="42"></i>
+                <span data-i18n="icon-resume">/currículo</span>
+            </div>
+        </div> 
 
-        .lang-wrapper:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-        }
-
-        .lang-slider {
-            position: absolute;
-            width: 36px;
-            height: 24px;
-            background: var(--accent);
-            border-radius: 15px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 8px var(--accent);
-        }
-
-        .lang-labels {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            z-index: 2;
-            padding: 0 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: bold;
-            pointer-events: none;
-            line-height: 24px;
-        }
-
-                /* Container do Switch */
-        .lang-wrapper {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            width: 75px;
-            height: 28px;
-            user-select: none;
-        }
-
-        .lang-wrapper:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
-        }
-
-        /* A "Pílula" que desliza */
-        .lang-slider {
-            position: absolute;
-            left: 2px; /* Posição inicial */
-            width: 34px;
-            height: 22px;
-            background: var(--accent);
-            border-radius: 15px;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 10px var(--accent);
-            z-index: 1;
-        }
-
-        /* As Labels PT e EN */
-        .lang-labels {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-            z-index: 2; /* Fica acima do slider */
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-        .lang-labels span {
-            color: var(--text-dim);
-            transition: color 0.3s;
-            width: 30px;
-            text-align: center;
-        }
-
-        .active-lang {
-            color: #ffffff !important;
-        }
-
-        .lang-labels span {
-            color: var(--text-dim);
-            transition: color 0.3s;
-        }
-
-        .active-lang {
-            color: #fff !important;
-        }
-
-        .win-header {
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.03);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: move;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .win-controls { display: flex; gap: 8px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; }
-        .dot-close { background: #ff5f56; }
-        .dot-min { background: #ffbd2e; }
-        .dot-max { background: #27c93f; }
-
-        .win-title { font-size: 0.75rem; font-family: 'JetBrains Mono'; color: var(--text-dim); text-transform: uppercase; }
-
-        .win-body { padding: 25px; overflow-y: auto; max-height: 70vh; }
-
-        /* Content Styles */
-        .project-exec {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .project-exec:hover { 
-            color: var(--text-dim);
-            border-color: var(--accent); background: rgba(59, 130, 246, 0.05); 
-        }
-
-        #accent.project-exec:hover { 
-            color: var(--accent);
-            border-color: var(--accent); background: rgba(59, 130, 246, 0.05); 
-        }
-
-        #dim.project-exec:hover { 
-            color: var(--text-dim);
-            border-color: var(--text-dim); background: rgba(59, 130, 246, 0.05); 
-        }
-
-        #rosa.project-exec:hover { 
-            color: var(--rosa);
-            border-color: var(--rosa); background: rgba(59, 130, 246, 0.05); 
-        }
-        #project.project-exec:hover { 
-            color: var(--text-dim);
-            border-color: var(--rosa); background: rgba(59, 130, 246, 0.05); 
-        }
-
-        #verde.project-exec:hover { 
-            color: var(--verde);
-            border-color: var(--verde); background: rgba(59, 130, 246, 0.05); 
-        }
-        .project-exec i { color: #10b981; }
-        
-        .tech-tag {
-            font-family: 'JetBrains Mono';
-            font-size: 0.65rem;
-            background: var(--accent-soft);
-            color: var(--rosa);
-            padding: 2px 8px;
-            border: 1px solid var(--rosa);
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-
-        /* Taskbar */
-        #taskbar {
-            height: 60px;
-            background: var(--taskbar);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border);
-            display: grid; /* Mudamos de flex para grid para controle total */
-            grid-template-columns: 1fr auto 1fr; /* Esquerda, Centro (auto), Direita */
-            align-items: center;
-            padding: 0 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 100;
-        }
-
-        .start-btn { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--accent); }
-        .time { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--text-dim); }
-
-        /* Typography */
-        h2 { font-size: 1.5rem; margin-bottom: 15px; color: var(--accent); }
-        p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
-
-    </style>
-</head>
-<body>
-
-    <div id="desktop">
-        <div class="desktop-icon" onclick="openWindow('win-about')">
-            <i data-lucide="user" size="42"></i>
-            <span>/about</span>
-        </div>
-        
-        <div class="desktop-icon" onclick="openWindow('win-projects')">
-            <i data-lucide="folder-code" size="42"></i>
-            <span>/projects</span>
+        <div id="win-about" class="window" style="top: 10%; left: 20%; width: 500px;">
+            <div class="win-header">
+                <div class="win-title" data-i18n="win-title-about">System Information: /sobre mim</div>
+                <div class="win-controls">
+                    <div class="dot dot-min"></div>
+                    <div class="dot dot-close" onclick="closeWindow('win-about')"></div>
+                </div>
+            </div>
+            <div class="win-body">
+                <h2>Gabriel Tertuliano</h2>
+                <p data-i18n="about-desc">
+                    Tenho 20 anos, sou apaixonado por música, tecnologia e viagens. Meu principal foco é o desenvolvimento back-end e, nos últimos tempos, também tenho me dedicado bastante à leitura.
+                </p>
+                <br>
+                <p><strong data-i18n="about-edu">Formação:</strong><br>
+                <p style="font-size: 15px;" data-i18n="about-edu-1">
+                    <strong>•</strong>Técnico em Informática (2020 - 2023) IFPB - Campus Itaporanga
+                </p>
+                <p style="font-size: 15px;" data-i18n="about-edu-2">
+                    <strong>•</strong>Cursando Análise e Desenvolvimento de Sistemas (2024 - 2027) IFPB - Campus Monteiro
+                </p>
+                <br>
+                <p style="font-style: italic; border-left: 2px solid var(--accent); padding-left: 15px;" data-i18n="about-quote">
+                    "Código limpo nasce da paciência e de várias xícaras de café."
+                </p>
+                
+            </div>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('win-skills')">
-            <i data-lucide="cpu" size="42"></i>
-            <span>/stack</span>
+        <div id="win-projects" class="window" style="top: 15%; left: 25%; width: 600px;">
+            <div class="win-header">
+                <div class="win-title" data-i18n="win-title-projects">Executable Files: /projetos</div>
+                <div class="win-controls">
+                    <div class="dot dot-min"></div>
+                    <div class="dot dot-close" onclick="closeWindow('win-projects')"></div>
+                </div>
+            </div>
+            <div class="win-body">
+                <div class="project-exec" id="project">
+                    <i data-lucide="square-mouse-pointer" size="28"></i>
+                    <div>
+                        <strong>IFit</strong>
+                        <div style="margin-top:5px">
+                            <span class="tech-tag">Django</span><span class="tech-tag">sickit-learn</span><span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-exec" id="project">
+                    <i data-lucide="square-mouse-pointer" size="28"></i>
+                    <div>
+                        <strong data-i18n="proj-desc-1">Gerenciador de tarefas com árvore Heap</strong>
+                        <div style="margin-top:5px">
+                            <span class="tech-tag">Java</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('win-contact')">
-            <i data-lucide="terminal" size="42"></i>
-            <span>/contact</span>
+        <div id="win-skills" class="window" style="top: 20%; left: 30%; width: 450px;">
+            <div class="win-header">
+                <div class="win-title" data-i18n="win-title-skills">Core Modules: /Habilidades</div>
+                <div class="win-controls">
+                    <div class="dot dot-min"></div>
+                    <div class="dot dot-close" onclick="closeWindow('win-skills')"></div>
+                </div>
+            </div>
+            <div class="win-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h4 style="color:var(--verde); margin-bottom:10px" data-i18n="skills-lang">Linguagens</h4>
+                        <p>• Java <br>• Python<br>• JavaScript<br>• SQL</br>• PHP</p>
+                    </div>
+                    <div>
+                        <h4 style="color:var(--verde); margin-bottom:10px" data-i18n="skills-frameworks">Frameworks</h4>
+                        <p>• Spring Boot<br>• Laravel<br>• Vue<br>• React</p>
+                    </div>
+                    <div>
+                        <h4 style="color:var(--verde); margin-bottom:10px" data-i18n="skills-infra">Infra</h4>
+                        <p>• Docker<br>• Git<br>• Github<br>• Bitbucket<br></p> 
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('win-resume')">
-            <i data-lucide="file-text" size="42"></i>
-            <span>/curriculo</span>
+        <div id="win-contact" class="window" style="top: 30%; left: 40%; width: 400px;">
+            <div class="win-header">
+                <div class="win-title" data-i18n="win-title-contact">Network Interface: /contato</div>
+                <div class="win-controls">
+                    <div class="dot dot-min"></div>
+                    <div class="dot dot-close" onclick="closeWindow('win-contact')"></div>
+                </div>
+            </div>
+            <div class="win-body" style="text-align: center;">
+
+                <div id="accent" class="project-exec">
+                    <i class="si si-linkedin" style="font-size: 24px; color: var(--text-dim);"></i>
+                    <div>
+                        <a href="https://linkedin.com/in/gabriel-tertuliano-" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div id="dim" class="project-exec">
+                    <i class="si si-github" style="font-size: 24px; color: var(--text-dim);"></i>
+                    <div>
+                        <a href="https://github.com/CCodeKey" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">GitHub</a>
+                    </div>
+                </div>
+
+                <div id="verde" class="project-exec">
+                    <i class="si si-whatsapp" style="font-size: 24px; color: var(--text-dim);"></i>
+                    <div>
+                        <a href="https://wa.me/83996228117" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">WhatsApp</a>
+                    </div>
+                </div>
+
+                <div id="rosa" class="project-exec">
+                    <i class="si si-instagram" style="font-size: 24px; color: var(--text-dim);"></i>
+                    <div>
+                        <a href="https://www.instagram.com/codekey.py/" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">Instagram</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div> ```
 
-    ### 2. Adicionar a Janela do Currículo
-    Agora, crie a janela que vai se abrir quando o ícone for clicado. Você pode colar este bloco de código logo abaixo da sua última janela (`win-contact`) e antes do rodapé (`<footer id="taskbar">`):
-
-    ```html
         <div id="win-resume" class="window" style="top: 25%; left: 35%; width: 400px;">
             <div class="win-header">
-                <div class="win-title">Document Viewer: /curriculo.pdf</div>
+                <div class="win-title" data-i18n="win-title-resume">Document Viewer: /curriculo.pdf</div>
                 <div class="win-controls">
                     <div class="dot dot-min"></div>
                     <div class="dot dot-close" onclick="closeWindow('win-resume')"></div>
@@ -335,318 +184,36 @@
             </div>
             <div class="win-body" style="text-align: center;">
                 <i data-lucide="file-badge-2" size="64" style="color: var(--accent); margin-bottom: 15px;"></i>
-                <p style="margin-bottom: 25px;">Faça o download do meu currículo em PDF para ver mais detalhes sobre minha trajetória e experiências.</p>
+                <p style="margin-bottom: 25px;" data-i18n="resume-text">Faça o download do meu currículo em PDF para ver mais detalhes sobre minha trajetória e experiências.</p>
                 
-                <a href="./public/curriculo_ptBR.pdf" download="Curriculo_Gabriel_Tertuliano.pdf" style="text-decoration: none;">
+                <a id="resume-link" href="public/curriculo_ptBR.pdf" download="Curriculo_Gabriel_Tertuliano.pdf" style="text-decoration: none;">
                     <div id="accent" class="project-exec" style="justify-content: center; background: rgba(59, 130, 246, 0.1);">
                         <i data-lucide="download" size="24" style="color: var(--accent);"></i>
-                        <strong style="color: var(--text);">Baixar PDF</strong>
+                        <strong style="color: var(--text);" data-i18n="resume-btn">Baixar PDF</strong>
                     </div>
                 </a>
             </div>
         </div>
 
-    </div>
-
-    <div id="win-about" class="window" style="top: 10%; left: 20%; width: 500px;">
-        <div class="win-header">
-            <span data-i18n="icon-about">/about</span>
-            <div class="win-title" data-i18n="win-title-about">System Information: /about me</div>
-            <div class="win-controls">
-                <div class="dot dot-min"></div>
-                <div class="dot dot-close" onclick="closeWindow('win-about')"></div>
+        <footer id="taskbar">
+            <div class="start-btn">
+                <i data-lucide="code-xml" size="20"></i>
+                <span>Gabriel Tertuliano</span>
             </div>
-        </div>
-        <div class="win-body">
-            <h2>Gabriel Tertuliano</h2>
-            <p data-i18n="about-desc">
-                Tenho 20 anos, sou apaixonado por música, tecnologia e viagens. Meu principal foco é o desenvolvimento back-end e, nos últimos tempos, também tenho me dedicado bastante à leitura.
-            </p>
-            <br>
-            <p><strong>Formação:</strong><br>
-            <p style="font-size: 15px;">
-                <strong>•</strong> Técnico em Informática (2020 - 2023) IFPB - Campus Itaporanga<br>
-                <strong>•</strong> Cursando Análise e Desenvolvimento de Sistemas (2024 - 2027) IFPB - Campus Monteiro
-            </p>
-            <br>
-            <p style="font-style: italic; border-left: 2px solid var(--accent); padding-left: 15px;">
-                "Código limpo nasce da paciência e de várias xícaras de café."
-            </p>
-            
-        </div>
-    </div>
 
-    <div id="win-projects" class="window" style="top: 15%; left: 25%; width: 600px;">
-        <div class="win-header">
-            <div class="win-title">Executable Files: /projects</div>
-            <div class="win-controls">
-                <div class="dot dot-min"></div>
-                <div class="dot dot-close" onclick="closeWindow('win-projects')"></div>
-            </div>
-        </div>
-        <div class="win-body">
-            <div class="project-exec" id="project">
-                <i data-lucide="square-mouse-pointer" size="28"></i>
-                <div>
-                    <strong>IFit</strong>
-                    <div style="margin-top:5px">
-                        <span class="tech-tag">Django</span><span class="tech-tag">sickit-learn</span><span class="tech-tag">PostgreSQL</span>
+            <div style="display: flex; justify-content: center;">
+                <div class="lang-wrapper" onclick="toggleLanguage()">
+                    <div id="lang-slider" class="lang-slider"></div>
+                    <div class="lang-labels">
+                        <span id="label-pt" class="active-lang">PT</span>
+                        <span id="label-en">EN</span>
                     </div>
                 </div>
             </div>
 
-            <div class="project-exec" id="project">
-                <i data-lucide="square-mouse-pointer" size="28"></i>
-                <div>
-                    <strong>Gerenciador de tarefas com árvore Heap</strong>
-                    <div style="margin-top:5px">
-                        <span class="tech-tag">Java</span>
-                    </div>
-                </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <div id="clock" class="time">00:00:00</div>
             </div>
-
-        </div>
-
-    </div>
-
-    <div id="win-skills" class="window" style="top: 20%; left: 30%; width: 450px;">
-        <div class="win-header">
-            <div class="win-title">Core Modules: /skills</div>
-            <div class="win-controls">
-                <div class="dot dot-min"></div>
-                <div class="dot dot-close" onclick="closeWindow('win-skills')"></div>
-            </div>
-        </div>
-        <div class="win-body">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <h4 style="color:var(--verde); margin-bottom:10px">Linguagens</h4>
-                    <p>• Java 17+<br>• Python<br>• JavaScript<br>• SQL</p>
-                </div>
-                <div>
-                    <h4 style="color:var(--verde); margin-bottom:10px">Frameworks</h4>
-                    <p>• Spring Boot<br>• Hibernate<br>• JUnit 5<br>• React</p>
-                </div>
-                <div>
-                    <h4 style="color:var(--verde); margin-bottom:10px">Infra</h4>
-                    <p>• Docker</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="win-contact" class="window" style="top: 30%; left: 40%; width: 400px;">
-        <div class="win-header">
-            <div class="win-title">Network Interface: /contact me</div>
-            <div class="win-controls">
-                <div class="dot dot-min"></div>
-                <div class="dot dot-close" onclick="closeWindow('win-contact')"></div>
-            </div>
-        </div>
-        <div class="win-body" style="text-align: center;">
-
-            <div id="accent" class="project-exec">
-                <i data-lucide="linkedin" size="28"></i>
-                <div>
-                    <a href="https://linkedin.com/in/gabriel-tertuliano-" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">LinkedIn</a>
-                </div>
-            </div>
-
-            <div id="dim" class="project-exec">
-                <i data-lucide="github" size="28"></i>
-                <div>
-                     <a href="https://github.com/CCodeKey" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">GitHub</a>
-                </div>
-            </div>
-
-            <div id="verde" class="project-exec">
-                <i data-lucide="message-circle-more" size="28"></i>
-                <div>
-                     <a href="https://wa.me/83996228117" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">WhatsApp</a>
-                </div>
-            </div>
-
-            <div id="rosa" class="project-exec">
-                <i data-lucide="instagram" size="28"></i>
-                <div>
-                     <a href="https://www.instagram.com/codekey.py/" style="color: var(--text-dim); text-decoration: none; font-family: 'JetBrains Mono';">Instagram</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer id="taskbar">
-        <div class="start-btn">
-            <i data-lucide="code-xml" size="20"></i>
-            <span>Gabriel Tertuliano</span>
-        </div>
-
-        <div style="display: flex; justify-content: center;">
-            <div class="lang-wrapper" onclick="toggleLanguage()">
-                <div id="lang-slider" class="lang-slider"></div>
-                <div class="lang-labels">
-                    <span id="label-pt" class="active-lang">PT</span>
-                    <span id="label-en">EN</span>
-                </div>
-            </div>
-        </div>
-
-        <div style="display: flex; justify-content: flex-end;">
-            <div id="clock" class="time">00:00:00</div>
-        </div>
-    </footer>
-
-    <script>
-        // Inicializa ícones
-        lucide.createIcons();
-
-        // Relógio do Sistema
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // --- SISTEMA DE IDIOMAS ---
-        const translations = {
-            pt: {
-                "icon-about": "/sobre",
-                "icon-projects": "/projetos",
-                "icon-skills": "/stack",
-                "icon-contact": "/contato",
-                "win-title-about": "System Information: /sobre mim",
-                "about-desc": "Tenho 20 anos, sou apaixonado por música, tecnologia e viagens. Meu principal foco é o desenvolvimento back-end e, nos últimos tempos, também tenho me dedicado bastante à leitura.",
-                "about-edu": "<strong>Formação:</strong>",
-                "about-edu-1": "<strong>•</strong> Técnico em Informática (2020 - 2023) IFPB - Campus Itaporanga",
-                "about-edu-2": "<strong>•</strong> Cursando Análise e Desenvolvimento de Sistemas (2024 - 2027) IFPB - Campus Monteiro",
-                "about-quote": '"Código limpo nasce da paciência e de várias xícaras de café."',
-                "win-title-projects": "Executable Files: /projetos",
-                "proj-desc-1": "Gerenciador de tarefas com árvore Heap",
-                "win-title-skills": "Core Modules: /habilidades",
-                "skills-lang": "Linguagens",
-                "win-title-contact": "Network Interface: /contato"
-            },
-            en: {
-                "icon-about": "/about",
-                "icon-projects": "/projects",
-                "icon-skills": "/stack",
-                "icon-contact": "/contact",
-                "win-title-about": "System Information: /about me",
-                "about-desc": "I am 20 years old, passionate about music, technology, and traveling. My main focus is back-end development, and lately, I've also been dedicating a lot of time to reading.",
-                "about-edu": "<strong>Education:</strong>",
-                "about-edu-1": "<strong>•</strong> IT Technician (2020 - 2023) IFPB - Itaporanga Campus",
-                "about-edu-2": "<strong>•</strong> Studying Systems Analysis and Development (2024 - 2027) IFPB - Monteiro Campus",
-                "about-quote": '"Clean code is born from patience and several cups of coffee."',
-                "win-title-projects": "Executable Files: /projects",
-                "proj-desc-1": "Task Manager with Heap Tree",
-                "win-title-skills": "Core Modules: /skills",
-                "skills-lang": "Languages",
-                "win-title-contact": "Network Interface: /contact me"
-            }
-        };
-
-
-        let currentLang = "pt";
-
-        function toggleLanguage() {
-            // 1. Alternar a variável de idioma
-            currentLang = (currentLang === "pt") ? "en" : "pt";
-            
-            // 2. Elementos da Animação
-            const slider = document.getElementById('lang-slider');
-            const labelPt = document.getElementById('label-pt');
-            const labelEn = document.getElementById('label-en');
-
-            // 3. Executar a Animação Visual
-            if (currentLang === "en") {
-                slider.style.transform = "translateX(35px)"; // Move a pílula para a direita
-                labelEn.classList.add('active-lang');
-                labelPt.classList.remove('active-lang');
-            } else {
-                slider.style.transform = "translateX(0px)"; // Volta a pílula para a esquerda
-                labelPt.classList.add('active-lang');
-                labelEn.classList.remove('active-lang');
-            }
-
-            // 4. Traduzir os textos (Certifique-se de ter o objeto 'translations' definido)
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[currentLang] && translations[currentLang][key]) {
-                    element.innerHTML = translations[currentLang][key];
-                }
-            });
-        }
-
-
-        // Gerenciamento de Janelas
-        let zIndexCounter = 100;
-
-        function openWindow(id) {
-            const win = document.getElementById(id);
-            win.style.display = 'flex';
-            zIndexCounter++;
-            win.style.zIndex = zIndexCounter;
-        }
-
-
-        function closeWindow(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        // Tornar janelas clicáveis para trazer para frente
-        document.querySelectorAll('.window').forEach(win => {
-            win.addEventListener('mousedown', () => {
-                zIndexCounter++;
-                win.style.zIndex = zIndexCounter;
-            });
-        });
-
-        // Script simples de "Drag and Drop" para as janelas
-        document.querySelectorAll('.win-header').forEach(header => {
-            let isDragging = false;
-            let currentX;
-            let currentY;
-            let initialX;
-            let initialY;
-            let xOffset = 0;
-            let yOffset = 0;
-
-            const win = header.parentElement;
-
-            header.addEventListener('mousedown', dragStart);
-            document.addEventListener('mousemove', drag);
-            document.addEventListener('mouseup', dragEnd);
-
-            function dragStart(e) {
-                initialX = e.clientX - xOffset;
-                initialY = e.clientY - yOffset;
-                if (e.target === header || e.target.parentElement === header) {
-                    isDragging = true;
-                }
-            }
-
-            function drag(e) {
-                if (isDragging) {
-                    e.preventDefault();
-                    currentX = e.clientX - initialX;
-                    currentY = e.clientY - initialY;
-                    xOffset = currentX;
-                    yOffset = currentY;
-                    setTranslate(currentX, currentY, win);
-                }
-            }
-
-            function setTranslate(xPos, yPos, el) {
-                el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-            }
-
-            function dragEnd(e) {
-                initialX = currentX;
-                initialY = currentY;
-                isDragging = false;
-            }
-        });
-    </script>
-</body>
+        </footer>
+    </body>
 </html>

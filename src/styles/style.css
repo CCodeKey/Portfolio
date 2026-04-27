@@ -256,3 +256,47 @@ p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
     height: 100%;
     object-fit: cover;
 }
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+    }
+
+    #desktop {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .desktop-icon {
+        width: 100%;
+        max-width: 250px;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 15px;
+        padding: 12px;
+    }
+
+    .desktop-icon span {
+        font-size: 1rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .window {
+        position: fixed;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh;
+        border-radius: 0;
+        transform: none !important;
+    }
+
+    .win-body {
+        max-height: calc(100vh - 60px);
+    }
+}

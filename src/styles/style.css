@@ -15,7 +15,7 @@
 body {
     background: radial-gradient(circle at center, #111 0%, #000 100%);
     font-family: 'Inter', sans-serif;
-    height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
     color: var(--text);
 }
@@ -291,7 +291,7 @@ p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
         top: 0 !important;
         left: 0 !important;
         width: 100vw !important;
-        height: 100vh;
+        min-height: 100dvh;
         border-radius: 0;
         transform: none !important;
     }
@@ -299,4 +299,45 @@ p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
     .win-body {
         max-height: calc(100vh - 60px);
     }
+}
+
+.window {
+    width: min(90vw, 500px);
+    max-width: 100%;
+}
+
+h2 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+}
+
+p {
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
+}
+
+@media (max-width: 768px) {
+    .desktop-icon i {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    #desktop {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #taskbar {
+        height: 50px;
+    }
+
+    .win-body {
+        max-height: calc(100vh - 50px);
+    }
+}
+
+
+* {
+    max-width: 100%;
 }

@@ -197,7 +197,18 @@ body {
 .project-item.project-exec:hover { color: var(--text-dim); border-color: var(--rosa); }
 #verde.project-exec:hover { color: var(--verde); border-color: var(--verde); }
 
-.project-exec i { color: #10b981; }
+.project-exec svg {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px;
+}
+
+.project-exec i { 
+    color: #10b981;
+    width: 28px;
+    height: 28px;
+    min-width: 28px; 
+}
 
 .tech-tag {
     font-family: 'JetBrains Mono';
